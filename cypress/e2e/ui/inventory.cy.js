@@ -1,4 +1,4 @@
-const itemNames = require('../fixtures/sauce-demo-items.json')
+const itemNames = require('../../fixtures/sauce-demo-items.json')
 
 describe('Inventory Checker', () => {
     beforeEach(() => {

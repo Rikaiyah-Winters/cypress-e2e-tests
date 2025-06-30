@@ -1,0 +1,44 @@
+[
+    {
+        "label": "first name is missing",
+        "firstName": "",
+        "lastName": "Doe",
+        "postalCode": "90210",
+        "expectedError": "Error: First Name is required"
+    },
+    {
+        "label": "last name is missing",
+        "firstName": "Jane",
+        "lastName": "",
+        "postalCode": "90210",
+        "expectedError": "Error: Last Name is required"
+    },
+    {
+        "label": "postal code is missing",
+        "firstName": "Jane",
+        "lastName": "Doe",
+        "postalCode": "",
+        "expectedError": "Error: Postal Code is required"
+    },
+    {
+        "label": "only last name is filled",
+        "firstName": "",
+        "lastName": "Doe",
+        "postalCode": "",
+        "expectedError": "Error: First Name is required"
+    },
+    {
+        "label": "only postal code is filled",
+        "firstName": "",
+        "lastName": "",
+        "postalCode": "90210",
+        "expectedError": "Error: First Name is required"
+    },
+    {
+        "label": "only first name is filled",
+        "firstName": "Jane",
+        "lastName": "",
+        "postalCode": "",
+        "expectedError": "Error: Last Name is required"
+    }
+]

@@ -36,14 +36,29 @@ Cypress.Commands.add('getByDataTest', (dataTestName) => {
 })
 
 Cypress.Commands.add('checkout', (firstName, lastName, postalCode) => {
-    cy.getByDataTest('firstName').type('Jane');
-    cy.getByDataTest('lastName').type('Doe');
-    cy.getByDataTest('postalCode').type('90210');
-    cy.getByDataTest('continue').click()
+  cy.getByDataTest('checkout').click();
+
+  if (firstName) {
+    cy.getByDataTest('firstName').type(firstName);
+  }
+
+  if (lastName) {
+    cy.getByDataTest('lastName').type(lastName);
+  }
+
+  if (postalCode) {
+    cy.getByDataTest('postalCode').type(postalCode);
+  }
+
+  cy.getByDataTest('continue').click();
+
+  // Only check for success if all fields were filled
+  if (firstName && lastName && postalCode) {
     cy.getByDataTest('finish').click();
-    cy.getByDataTest('title').should('contain', "Complete!")
-    cy.getByDataTest('complete-header').should('have.text', "Thank you for your order!")
-})
+    cy.getByDataTest('title').should('contain', "Complete!");
+    cy.getByDataTest('complete-header').should('have.text', "Thank you for your order!");
+  }
+});
 
 //remove from cart (the first item in the cart)
 Cypress.Commands.add('removeItem', (itemName) => {
