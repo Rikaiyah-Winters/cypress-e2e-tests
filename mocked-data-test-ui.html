@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mocked Data Test UI</title>
+</head>
+<body>
+  <h1>User List</h1>
+  <ul id="user-list"></ul>
+
+  <script>
+    fetch('https://example.com/api/users')
+      .then(response => response.json())
+      .then(data => {
+        const userList = document.getElementById('user-list');
+        data.forEach(user => {
+          const li = document.createElement('li');
+          li.textContent = `${user.name} (${user.email})`;
+          userList.appendChild(li);
+        });
+      })
+      .catch(error => {
+        const userList = document.getElementById('user-list');
+        userList.innerHTML = `<li style="color: red">Error loading users: ${error.message}</li>`;
+      });
+  </script>
+</body>
+</html>
