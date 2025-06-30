@@ -1,0 +1,15 @@
+# Node modules (huge folder — don’t commit this)
+node_modules/
+
+# Cypress videos and screenshots (auto-generated during test runs)
+cypress/videos/
+cypress/screenshots/
+
+# Mac system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+# Environment config (e.g., login credentials)
+.env
