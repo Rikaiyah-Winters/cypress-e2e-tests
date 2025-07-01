@@ -1,9 +1,9 @@
-const testCases = require('../../fixtures/field-verification.json')
+const testCases = require('../../fixtures/form-validation.json')
 
 describe('Missing Fields during checkout blocks progress', () => {
     beforeEach(() => {
         cy.session('standard_user', () => {
-            cy.loginFromFixture(); // logs in once and reuses session
+            cy.loginFromFixture();
         });
         cy.visit('https://www.saucedemo.com/inventory.html', { failOnStatusCode: false });
         cy.url().should('include', '/inventory.html');

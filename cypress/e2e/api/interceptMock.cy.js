@@ -1,4 +1,4 @@
-describe('User List UI', () => {
+describe('User List UI - Success Case', () => {
   beforeEach(() => {
     cy.intercept('GET', 'https://example.com/api/users', {
       statusCode: 200,
@@ -8,7 +8,8 @@ describe('User List UI', () => {
       ]
     }).as('getUsers');
 
-    cy.visit('mocked-data-test-ui.html'); // Replace with your actual file path or URL
+    cy.visit('mocked-data-test-ui.html');
+    cy.wait('@getUsers');
   });
 
   it('renders the user list title', () => {
@@ -16,21 +17,30 @@ describe('User List UI', () => {
   });
 
   it('displays all mocked users in the list', () => {
-    cy.get('#user-list li').should('have.length', 2);
-    cy.get('#user-list li').first().should('contain', 'Jane Doe');
-    cy.get('#user-list li').last().should('contain', 'John Smith');
+    cy.get('#user-list li').as('users');
+    cy.get('@users').should('have.length', 2);
+    cy.get('@users').each((user) => {
+      cy.wrap(user).should('match', 'li').and('contain.text', '@');
+    });
+    cy.get('@users').first().should('contain', 'Jane Doe');
+    cy.get('@users').last().should('contain', 'John Smith');
   });
+});
 
-   it('shows error when API fails', () => {
+describe('User List UI - Error Case', () => {
+  beforeEach(() => {
     cy.intercept('GET', 'https://example.com/api/users', {
       statusCode: 500,
       body: {}
     }).as('getUsersError');
 
-    cy.visit('mocked-data-test-ui.html'); // re-visiting with error intercept
+    cy.visit('mocked-data-test-ui.html');
+    cy.wait('@getUsersError')
+  });
 
+  it('shows error when API fails', () => {
     cy.get('#user-list li')
       .should('have.length', 1)
       .and('contain', 'Error loading users');
-  }); 
-});
+  });
+})

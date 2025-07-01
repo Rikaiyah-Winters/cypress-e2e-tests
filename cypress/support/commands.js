@@ -24,10 +24,10 @@ Cypress.Commands.add('verifyItemBlock', (itemName, expectedPrice) => {
     })
 })
 
-//custom command to add items to cart
+
 Cypress.Commands.add('addToCart', (itemName) => {
     cy.contains('[data-test="inventory-item"]', itemName).within(() => {
-        cy.get('button').click() //i think this is good since we want to keep things flexible
+        cy.get('button').click() 
     })
 })
 
@@ -60,7 +60,11 @@ Cypress.Commands.add('checkout', (firstName, lastName, postalCode) => {
   }
 });
 
-//remove from cart (the first item in the cart)
+
 Cypress.Commands.add('removeItem', (itemName) => {
     cy.contains('[data-test="inventory-item"]', itemName).find('button').click()
 })
+
+Cypress.Commands.add('checkCartCount', (expectedCount) => {
+    cy.getByDataTest('shopping-cart-badge').should('have.text', `${expectedCount}`);
+});
