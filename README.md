@@ -47,3 +47,6 @@ or run headlessly: `npx cypress run`
 - cypress/support/ – custom commands
 
 - mocked-data-test-ui.html – standalone UI for mocked API testing
+
+---
+![Cypress Tests](https://github.com/Rikaiyah-Winters/cypress-e2e-tests/actions/workflows/cypress.yml/badge.svg)
